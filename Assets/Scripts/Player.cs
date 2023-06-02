@@ -18,6 +18,12 @@ public class Player : MonoBehaviour
     void Update()
     {
 
+        CalculateMovement();
+
+    }
+
+    void CalculateMovement()
+    {
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
 
@@ -25,23 +31,15 @@ public class Player : MonoBehaviour
 
         transform.Translate(direction * _speed * Time.deltaTime);
 
-        if(transform.position.y >= 0)
-        {
-            transform.position = new Vector3(transform.position.x, 0, 0);
-        }
-        else if(transform.position.y <= -3.8f)
-        {
-            transform.position = new Vector3(transform.position.x, -3.8f, 0);
-        }
+        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -3.8f, 0), 0);
 
-        if(transform.position.x > 11.3f)
+        if (transform.position.x > 11.3f)
         {
             transform.position = new Vector3(-11.3f, transform.position.y, 0);
         }
-        else if(transform.position.x < -11.3f)
+        else if (transform.position.x < -11.3f)
         {
             transform.position = new Vector3(11, transform.position.y, 0);
         }
-
     }
 }
