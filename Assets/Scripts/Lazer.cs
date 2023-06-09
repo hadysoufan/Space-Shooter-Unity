@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Lazer : MonoBehaviour
 {
-
+    [SerializeField]
     private float _speed = 8.0f;
 
 
