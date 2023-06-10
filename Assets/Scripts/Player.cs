@@ -7,6 +7,7 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private float _speed = 3.5f;
+    private float _speedMultiplier = 2;
     public float horizontalInput, verticalInput;
     [SerializeField]
     private GameObject _laserPrefab;
@@ -21,6 +22,7 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private bool _isTripleShotActive = false;
+    private bool _isSpeedBoostActive = false;
 
 
     void Start()
@@ -82,10 +84,6 @@ public class Player : MonoBehaviour
             Instantiate(_laserPrefab, transform.position + new Vector3(0, 1.05f, 0), Quaternion.identity);
 
         }
-
-
-
-
     }
 
     public void Damage()
@@ -110,5 +108,20 @@ public class Player : MonoBehaviour
     {
         yield return new WaitForSeconds(5.0f);
         _isTripleShotActive = false;
+    }
+
+    public void SpeedBoostActive()
+    {
+        _isSpeedBoostActive = true;
+        _speed *= _speedMultiplier;
+        StartCoroutine(SpeedBoostPowerDownRoutine());
+    }
+
+    IEnumerator SpeedBoostPowerDownRoutine()
+    {
+        yield return new WaitForSeconds(5.0f);
+        _isSpeedBoostActive = false;
+        _speed /= _speedMultiplier;
+
     }
 }
