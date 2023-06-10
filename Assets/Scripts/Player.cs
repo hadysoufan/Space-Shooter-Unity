@@ -67,7 +67,7 @@ public class Player : MonoBehaviour
     void FireLazer()
     {
             _canFire = Time.time + _fireRate;
-            Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);  
+            Instantiate(_laserPrefab, transform.position + new Vector3(0, 1.05f, 0), Quaternion.identity);  
     }
 
     public void Damage()
